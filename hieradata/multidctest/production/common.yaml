@@ -1,0 +1,20 @@
+---
+base_packages::basepackages:
+  - emacs
+  - git
+  - imagemagick
+  - libmagick++-dev
+  - libmagickcore-dev
+  - libmagickwand-dev
+  - libcache-memcached-perl
+  - libsys-hostname-long-perl
+  - mailutils
+  - libnet-amazon-ec2-perl
+  - sharutils
+  - sysstat
+  - ntpdate
+  - libgeos-3.2.2
+  - libgeos-dev
+  - geoip-bin
+  - zsh
+  - s3cmd

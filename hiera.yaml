@@ -1,0 +1,15 @@
+---
+:backends:
+  - yaml
+:logger: puppet
+:yaml:
+  :datadir: "%{settings::manifestdir}/hiera/production" #environment will be used for stage,prod,etc
+:hierarchy:
+  - "nodes/%{::fqdn}" #If we have a directly assigned item, it wins
+  - "%{::domain}/common" #Next investigate the domain common items
+  - "%{::domain}/%{::instance_type}" #Next investigate the domain instance type specific items
+  - "role/%{::instance_type}" #Apply instance type information (e.g. core)
+  - "codename/%{::lsbdistcodename}"
+  - common #Apply all common info
+  - users
+:merge_behavior: deeper
