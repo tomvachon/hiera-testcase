@@ -3,7 +3,7 @@
   - yaml
 :logger: puppet
 :yaml:
-  :datadir: "%{settings::manifestdir}/hiera/production" #environment will be used for stage,prod,etc
+  :datadir: "/home/nlaferriere/work/testing/hiera-testcase/hieradata/multidctest/production" #environment will be used for stage,prod,etc
 :hierarchy:
   - "nodes/%{::fqdn}" #If we have a directly assigned item, it wins
   - "%{::domain}/common" #Next investigate the domain common items

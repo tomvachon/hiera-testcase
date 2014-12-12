@@ -1,0 +1,53 @@
+failed puppet run example,
+- Hiera stops looking for more data sources after finding codename/precise
+- So doesn't get array in the common.yaml to merge it
+- You can look at this from using the rspec in the base_packages module
+
+Debug: importing '/home/nlaferriere/work/testing/hiera-testcase/modules/base_packages/spec/fixtures/manifests/site.pp' in environment production
+Debug: importing '/home/nlaferriere/work/testing/hiera-testcase/modules/base_packages/spec/fixtures/modules/base_packages/manifests/init.pp' in environment production
+Debug: Automatically imported base_packages from base_packages into production
+Debug: hiera(): Looking up base_packages::basepackages in YAML backend
+Debug: hiera(): Looking for data source nodes/apollo.i.sessionm.com
+Debug: hiera(): Cannot find datafile /home/nlaferriere/work/testing/hiera-testcase/hieradata/multidctest/production/nodes/apollo.i.sessionm.com.yaml, skipping
+Debug: hiera(): Looking for data source i.sessionm.com/common
+Debug: hiera(): Cannot find datafile /home/nlaferriere/work/testing/hiera-testcase/hieradata/multidctest/production/i.sessionm.com/common.yaml, skipping
+Debug: hiera(): Looking for data source codename/precise
+Debug: hiera(): Found base_packages::basepackages in codename/precise
+Notice: Scope(Class[Base_packages]): base packages is: libmagick++5
+Notice: Compiled catalog for apollo.i.sessionm.com in environment production in 0.01 seconds
+
+
+Hiera cli works perfectly.  It looks for all of the sources and merges everything perfectly.
+
+
+nlaferriere@apollo:~/work/testing/hiera-testcase$ hiera base_packages::basepackages --array ::lsbdistcodename=precise -c hiera.yaml --debug
+WARN: 2014-12-12 14:46:01 -0500: Not using Hiera::Puppet_logger. It does not report itself to be suitable.
+DEBUG: 2014-12-12 14:46:01 -0500: Hiera YAML backend starting
+DEBUG: 2014-12-12 14:46:01 -0500: Looking up base_packages::basepackages in YAML backend
+DEBUG: 2014-12-12 14:46:01 -0500: Looking for data source codename/precise
+DEBUG: 2014-12-12 14:46:01 -0500: Found base_packages::basepackages in codename/precise
+DEBUG: 2014-12-12 14:46:01 -0500: Looking for data source common
+DEBUG: 2014-12-12 14:46:01 -0500: Found base_packages::basepackages in common
+DEBUG: 2014-12-12 14:46:01 -0500: Looking for data source users
+DEBUG: 2014-12-12 14:46:01 -0500: Cannot find datafile /home/nlaferriere/work/testing/hiera-testcase/hieradata/multidctest/production/users.yaml, skipping
+["libmagick++5",
+ "emacs",
+ "git",
+ "imagemagick",
+ "libmagick++-dev",
+ "libmagickcore-dev",
+ "libmagickwand-dev",
+ "libcache-memcached-perl",
+ "libsys-hostname-long-perl",
+ "mailutils",
+ "libnet-amazon-ec2-perl",
+ "sharutils",
+ "sysstat",
+ "ntpdate",
+ "libgeos-3.2.2",
+ "libgeos-dev",
+ "geoip-bin",
+ "zsh",
+ "s3cmd"]
+nlaferriere@apollo:~/work/testing/hiera-testcase$ 
+
